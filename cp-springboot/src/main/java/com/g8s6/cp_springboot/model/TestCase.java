@@ -1,7 +1,6 @@
 package com.g8s6.cp_springboot.model;
 
 import jakarta.annotation.Generated;
-import jakarta.annotation.sql.DataSourceDefinition;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
