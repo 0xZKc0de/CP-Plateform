@@ -64,6 +64,13 @@
             <artifactId>lombok</artifactId>
             <version>1.18.30</version> <scope>provided</scope>
         </dependency>
+
+        <!-- this one is for MySQL -->
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+            <version>8.0.32</version> <!-- Use the desired version -->
+        </dependency>
     </dependencies>
 
     <build>
