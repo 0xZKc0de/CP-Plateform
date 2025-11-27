@@ -1,4 +1,4 @@
-package org.acme.Entity;
+package org.acme.Model;
 
 import java.util.List;
 
