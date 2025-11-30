@@ -6,6 +6,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,14 +26,20 @@ public class Problem {
     public double time_limit;
     public double memory_limit;
     public String resumeUrl;
-
+    public Difficulty difficulty;
+    
     @OneToMany(mappedBy = "problem")
     private List<TestCase> testCases;
 
     @OneToMany(mappedBy = "problem")
-    private List<Submission> submissions;
+    public List<Submission> submissions;
 
-    @OneToMany(mappedBy = "problem")
-    private List<Topic> topics; 
+    @ManyToMany
+    @JoinTable(
+        name = "problem_topics",
+        joinColumns = @JoinColumn(name = "problem_id"),
+        inverseJoinColumns = @JoinColumn(name = "topic_id")
+    )
+    public List<Topic> topics;
 
 }

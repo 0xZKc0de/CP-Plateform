@@ -4,6 +4,7 @@ import java.util.List;
 
 import jakarta.annotation.Generated;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,12 +16,11 @@ import jakarta.persistence.GenerationType;
 @NoArgsConstructor
 @Entity
 public class Topic {
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY) 
+    public long id;
+    public String name;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) 
-    long id;
-    String name;
-
-    @OneToMany(mappedBy = "topics")
-    private List<Problem> problems;
+  
+    @ManyToMany(mappedBy = "topics")
+    public List<Problem> problems;
 }

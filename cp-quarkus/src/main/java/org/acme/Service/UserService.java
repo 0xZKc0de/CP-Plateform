@@ -1,5 +1,21 @@
 package org.acme.Service;
 
+import org.acme.Repository.UserRepository;
+
+import java.util.Optional;
+
+import org.acme.DTO.Response.UserDTO;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
+
+@ApplicationScoped
 public class UserService {
-    
+
+
+    @Inject
+    UserRepository userRepository;
+
+    public Optional<UserDTO> findById(Long id){
+        return userRepository.findUserDtoById(id);
+    }
 }

@@ -1,5 +1,7 @@
 package org.acme.Model;
 
-public class Difficulty {
-    
+public enum Difficulty {
+    EASY,
+    MEDIUM,
+    HARD
 }
