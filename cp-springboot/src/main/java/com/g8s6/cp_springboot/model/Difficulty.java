@@ -1,5 +1,7 @@
 package com.g8s6.cp_springboot.model;
 
-public class Difficulty {
-    
+public enum Difficulty {
+    EASY,
+    MEDIUM,
+    HARD,
 }

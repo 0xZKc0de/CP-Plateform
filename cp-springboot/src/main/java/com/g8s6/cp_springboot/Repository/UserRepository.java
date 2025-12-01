@@ -1,0 +1,24 @@
+package com.g8s6.cp_springboot.Repository;
+
+import com.g8s6.cp_springboot.DTO.UserDTO;
+import com.g8s6.cp_springboot.model.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+
+import java.util.Optional;
+
+public interface UserRepository extends JpaRepository<User, Long> {
+
+    Optional<User> findByEmail(String email);
+
+    Optional<User> findByUsername(String username);
+
+    @Query("SELECT new com.g8s6.cp_springboot.DTO.UserDTO(u.id, u.username, u.email, u.rating) " +
+            "FROM User u WHERE u.id = :id")
+    Optional<UserDTO> findUserDtoById(@Param("id") Long id);
+
+    @Query("SELECT new com.g8s6.cp_springboot.DTO.UserDTO(u.id, u.username, u.email, u.rating) " +
+            "FROM User u WHERE u.email = :email")
+    Optional<UserDTO> findUserDtoByEmail(@Param("email") String email);
+}

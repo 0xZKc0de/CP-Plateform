@@ -1,16 +1,14 @@
 package com.g8s6.cp_springboot.model;
 
-import jakarta.annotation.Generated;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor @AllArgsConstructor
-@Data @Entity
+@Data
+//@Table(name = "test_cases")
+@Entity
 public class TestCase {
 
     @Id
@@ -19,4 +17,8 @@ public class TestCase {
 
     private String input_data;
     private String excepted_output;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "problem_id", nullable = false)
+    private Problem problem;
 }

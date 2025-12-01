@@ -3,17 +3,15 @@ package com.g8s6.cp_springboot.model;
 import java.util.List;
 
 import jakarta.annotation.Generated;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 
 @AllArgsConstructor @NoArgsConstructor
-@Data @Entity
+@Data
+//@Table(name = "topics")
+@Entity
 public class Topic {
 
     @Id
@@ -21,6 +19,6 @@ public class Topic {
     long id;
     String name;
 
-    @OneToMany(mappedBy = "topics")
+    @ManyToMany(mappedBy = "topics")
     private List<Problem> problems;
 }
