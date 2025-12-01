@@ -22,7 +22,7 @@ public class UserController {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<UserDTO> getUsers() {
-        return userService.
+        return userService.getUsers();
     }
 
     @GET
