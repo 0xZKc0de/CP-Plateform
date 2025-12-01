@@ -1,0 +1,34 @@
+services:
+  app:
+    build: .
+    container_name: quarkus-app
+    ports:
+      - "8083:8080"
+    environment:
+      - QUARKUS_DATASOURCE_JDBC_URL=jdbc:mysql://quarkus-db:3306/cp-plateforme
+      - QUARKUS_DATASOURCE_USERNAME=root
+      - QUARKUS_DATASOURCE_PASSWORD=root
+      - QUARKUS_DATASOURCE_DB_KIND=mysql
+      - QUARKUS_HIBERNATE_ORM_DATABASE_GENERATION=drop-and-create
+    depends_on:
+      mysqldb:
+        condition: service_healthy # انتظر حتى تصبح قاعدة البيانات صحية
+
+  mysqldb:
+    image: mysql:8.0
+    container_name: quarkus-db
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=cp-plateforme
+    ports:
+      - "3307:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+    # هذا الجزء هو الأهم: فحص دوري للتأكد من أن قاعدة البيانات جاهزة
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+
+volumes:
+  db_data:
