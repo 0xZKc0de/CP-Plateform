@@ -7,18 +7,20 @@ import jakarta.enterprise.context.ApplicationScoped;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @ApplicationScoped
 public class UserRepository implements PanacheRepository<User> {
 
+    public List<UserDTO> findAllProjected() {
+        return findAll()
+                .project(UserDTO.class)
+                .list();
+    }
 
-    @Query(value = "SELECT id, username, email FROM users_table", nativeQuery = true)
-    List<UserProjection> findAllUsersSQL();
-    public Optional<UserDTO> findUserDtoById(Long id) { 
-        return find("id", id).singleResultOptional()
-           
-            .map(user -> new UserDTO(user.id ,user.username, user.email, user.rating)); 
+    public Optional<UserDTO> findUserDtoById(Long id) {
+        return find("id", id)
+                .project(UserDTO.class)
+                .singleResultOptional();
     }
 
     public Optional<User> findByEmail(String email) {
