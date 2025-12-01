@@ -2,6 +2,7 @@ package org.acme.Service;
 
 import org.acme.Repository.UserRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.acme.DTO.Response.UserDTO;
@@ -14,6 +15,10 @@ public class UserService {
 
     @Inject
     UserRepository userRepository;
+
+    public List<UserDTO> getUsers() {
+        return userRepository.findAll();
+    }
 
     public Optional<UserDTO> findById(Long id){
         return userRepository.findUserDtoById(id);
