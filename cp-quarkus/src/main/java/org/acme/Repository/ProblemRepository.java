@@ -7,8 +7,4 @@ import org.acme.Model.Problem;
 import java.util.List;
 
 @ApplicationScoped
-public class ProblemRepository implements PanacheRepository<Problem> {
-
-
-
-}
+public class ProblemRepository implements PanacheRepository<Problem> {}
