@@ -21,6 +21,10 @@ public class ProblemService {
         return problemRepository.find("title", title);
     }
 
+    public PanacheQuery<Problem> findById(Long id) {
+        return problemRepository.find("id", id);
+    }
+
     public List<Problem> findAll() {
         return problemRepository.listAll();
     }
