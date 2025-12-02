@@ -1,5 +1,6 @@
 package org.acme.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.GeneratedValue;
@@ -27,9 +28,11 @@ public class Submission {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @JsonIgnore
     public User user; 
 
     @ManyToOne
     @JoinColumn(name = "problem_id")
+    @JsonIgnore
     public Problem problem; 
 }

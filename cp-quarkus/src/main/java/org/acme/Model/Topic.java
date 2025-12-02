@@ -2,6 +2,7 @@ package org.acme.Model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.annotation.Generated;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
@@ -22,5 +23,6 @@ public class Topic {
 
   
     @ManyToMany(mappedBy = "topics")
+    @JsonIgnore
     public List<Problem> problems;
 }
