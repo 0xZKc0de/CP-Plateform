@@ -1,5 +1,6 @@
 package org.acme.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -23,5 +24,6 @@ public class TestCase {
 
     @ManyToOne
     @JoinColumn(name = "problem_id")
+    @JsonIgnore
     private Problem problem;
 }

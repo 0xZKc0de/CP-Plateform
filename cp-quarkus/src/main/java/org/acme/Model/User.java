@@ -2,6 +2,7 @@ package org.acme.Model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.annotation.Nonnull;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -26,5 +27,6 @@ public class User {
     public int rating;
 
     @OneToMany(mappedBy = "user")
+    @JsonIgnore
     public List<Submission> submissions;
 }
