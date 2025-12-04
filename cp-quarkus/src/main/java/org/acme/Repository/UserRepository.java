@@ -10,7 +10,7 @@ import java.util.Optional;
 
 @ApplicationScoped
 public class UserRepository implements PanacheRepository<User> {
-    
+
     public List<UserDTO> findAllProjected() {
         return findAll()
                 .project(UserDTO.class)
