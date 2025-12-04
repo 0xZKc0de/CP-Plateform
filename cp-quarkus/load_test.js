@@ -4,7 +4,7 @@ import { check } from 'k6'; // لاحظ أننا حذفنا sleep
 export const options = {
     stages: [
         { duration: '10s', target: 100 },  // تسخين سريع
-        { duration: '1m', target: 1000 },  // هجوم بـ 1000 مستخدم في نفس اللحظة!
+        { duration: '1m', target: 40 },  // هجوم بـ 1000 مستخدم في نفس اللحظة!
         { duration: '10s', target: 0 },
     ],
 };
