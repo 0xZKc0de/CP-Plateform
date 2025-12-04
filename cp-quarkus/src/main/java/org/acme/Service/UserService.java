@@ -5,7 +5,7 @@ import org.acme.Repository.UserRepository;
 import org.acme.DTO.Response.UserDTO;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import jakarta.transaction.Transactional; 
+import jakarta.transaction.Transactional;
 import jakarta.ws.rs.NotFoundException;
 
 import java.util.List;
