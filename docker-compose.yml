@@ -1,0 +1,92 @@
+version: '3.8'
+
+services:
+  # -------------------------------------------------------
+  # 1. Spring Boot (الاسم في جهازك: my-springboot-app)
+  # -------------------------------------------------------
+  springboot-app:
+    image: my-springboot-app
+    container_name: springboot-app
+    ports:
+      - "8081:8080"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://host.docker.internal:3306/cp-plateforme
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=
+    networks:
+      - monitoring
+
+  # -------------------------------------------------------
+  # 2. Quarkus JVM (الاسم في جهازك: my-quarkus-jvm)
+  # -------------------------------------------------------
+  quarkus-jvm:
+    image: my-quarkus-jvm
+    container_name: quarkus-jvm
+    ports:
+      - "8082:8083"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    environment:
+      - QUARKUS_DATASOURCE_JDBC_URL=jdbc:mysql://host.docker.internal:3306/cp-plateforme
+      - QUARKUS_DATASOURCE_USERNAME=root
+      - QUARKUS_DATASOURCE_PASSWORD=
+      - QUARKUS_HIBERNATE_ORM_DATABASE_GENERATION=none
+    networks:
+      - monitoring
+
+  # -------------------------------------------------------
+  # 3. Quarkus Native (الاسم في جهازك: quarkus-native-image)
+  # -------------------------------------------------------
+  quarkus-native:
+    image: quarkus-native-image  # ⚠️ تم التصحيح حسب صورتك
+    container_name: quarkus-native
+    ports:
+      - "8083:8083"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    environment:
+      - QUARKUS_DATASOURCE_JDBC_URL=jdbc:mysql://host.docker.internal:3306/cp-plateforme
+      - QUARKUS_DATASOURCE_USERNAME=root
+      - QUARKUS_DATASOURCE_PASSWORD=
+      - QUARKUS_HIBERNATE_ORM_DATABASE_GENERATION=none
+    networks:
+      - monitoring
+
+  # -------------------------------------------------------
+  # المراقبة
+  # -------------------------------------------------------
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9090:9090"
+    depends_on:
+      - springboot-app
+      - quarkus-jvm
+      - quarkus-native
+    networks:
+      - monitoring
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    volumes:
+      - grafana_data:/var/lib/grafana
+    depends_on:
+      - prometheus
+    networks:
+      - monitoring
+
+networks:
+  monitoring:
+
+volumes:
+  grafana_data:

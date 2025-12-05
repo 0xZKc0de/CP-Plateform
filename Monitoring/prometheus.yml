@@ -1,0 +1,21 @@
+global:
+  scrape_interval: 5s
+
+scrape_configs:
+  - job_name: 'springboot'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      # Spring Boot يعمل داخلياً على 8080 (حسب إعداداتك السابقة)
+      - targets: ['springboot-app:8080']
+
+  - job_name: 'quarkus-jvm'
+    metrics_path: '/q/metrics'
+    static_configs:
+      # ⚠️ يجب أن يكون 8083 لأن السجلات تقول Listening on 8083
+      - targets: ['quarkus-jvm:8083']
+
+  - job_name: 'quarkus-native'
+    metrics_path: '/q/metrics'
+    static_configs:
+      # ⚠️ يجب أن يكون 8083 لأن السجلات تقول Listening on 8083
+      - targets: ['quarkus-native:8083']

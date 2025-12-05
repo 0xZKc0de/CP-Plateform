@@ -1,19 +1,13 @@
-FROM maven:3.9.6-eclipse-temurin-21 AS build
+FROM eclipse-temurin:21-jre-alpine
+
 WORKDIR /app
 
-COPY pom.xml .
-COPY src ./src
 
-RUN mvn clean package -DskipTests
+COPY target/quarkus-app/lib/ /app/lib/
+COPY target/quarkus-app/*.jar /app/
+COPY target/quarkus-app/app/ /app/app/
+COPY target/quarkus-app/quarkus/ /app/quarkus/
 
-FROM eclipse-temurin:21-jre
-WORKDIR /work/
-
-COPY --from=build /app/target/quarkus-app/lib/ /work/lib/
-COPY --from=build /app/target/quarkus-app/*.jar /work/
-COPY --from=build /app/target/quarkus-app/app/ /work/app/
-COPY --from=build /app/target/quarkus-app/quarkus/ /work/quarkus/
-
-EXPOSE 8083
+EXPOSE 8080
 
 CMD ["java", "-jar", "quarkus-run.jar"]
