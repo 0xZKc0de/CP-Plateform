@@ -43,3 +43,25 @@ nb-configuration.xml
 /.quarkus/cli/plugins/
 # TLS Certificates
 .certs/
+
+# Grafana generated folders
+grafana-*/data/
+grafana-*/plugins/
+grafana-*/**/grafana.db
+
+# Grafana Quarkus and Spring Boot folders
+grafana-quarkus/
+grafana-springboot/
+
+# Docker volumes
+*/prometheus/
+*/prometheus-data/
+*/grafana/
+*/data/
+
+# OS & IDE files
+.DS_Store
+*.log
+.idea/
+target/
+
