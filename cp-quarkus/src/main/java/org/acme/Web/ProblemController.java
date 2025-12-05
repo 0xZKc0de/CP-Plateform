@@ -1,9 +1,9 @@
 package org.acme.Web;
 
 import jakarta.inject.Inject;
-import jakarta.ws.rs.*; // Import pour GET, POST, PUT, DELETE, etc.
+import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
-import jakarta.ws.rs.core.Response; // Pour gérer les statuts HTTP
+import jakarta.ws.rs.core.Response;
 import org.acme.Model.Problem;
 import org.acme.Service.ProblemService;
 
@@ -12,7 +12,7 @@ import java.util.List;
 
 @Path("api/problems")
 @Produces(MediaType.APPLICATION_JSON)
-@Consumes(MediaType.APPLICATION_JSON) // Important pour lire le JSON envoyé
+@Consumes(MediaType.APPLICATION_JSON)
 public class ProblemController {
 
     @Inject
