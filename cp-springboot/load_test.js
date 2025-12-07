@@ -12,5 +12,4 @@ export const options = {
 export default function () {
     const res = http.get('http://localhost:8080/api/users');
     check(res, { 'status was 200': (r) => r.status == 200 });
-    // حذفنا sleep(1) <-- الآن الهجوم متواصل بدون توقف
 }

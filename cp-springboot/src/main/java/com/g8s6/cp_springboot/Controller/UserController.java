@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.beans.factory.annotation.Value;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,6 +18,15 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+
+    @Value("${greeting.message}")
+    private String greetingMessage;
+
+    @GetMapping("/greeting")
+    public ResponseEntity<String> getGreeting() {
+        return ResponseEntity.ok(greetingMessage);
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<UserDTO> getUser(@PathVariable Long id) {

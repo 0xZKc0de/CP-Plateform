@@ -3,7 +3,7 @@ package org.acme.Service;
 import io.quarkus.hibernate.orm.panache.PanacheQuery;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import jakarta.transaction.Transactional; // Nécessaire pour les écritures (Add/Update/Delete)
+import jakarta.transaction.Transactional;
 import jakarta.ws.rs.WebApplicationException;
 import org.acme.Model.Problem;
 import org.acme.Repository.ProblemRepository;
